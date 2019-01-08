@@ -1,4 +1,4 @@
-package s.cala.androidcompents;
+package s.cala.androidcompent;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

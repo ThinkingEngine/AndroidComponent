@@ -1,4 +1,4 @@
-package s.cala.androidcompents;
+package s.cala.androidcompent;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

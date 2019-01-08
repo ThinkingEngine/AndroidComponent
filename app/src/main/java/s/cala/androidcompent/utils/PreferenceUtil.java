@@ -1,4 +1,4 @@
-package s.cala.androidcompents.utils;
+package s.cala.androidcompent.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -7,7 +7,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-import s.cala.androidcompents.base.BaseApplication;
+import s.cala.androidcompent.base.BaseApplication;
 
 /**
  * package name:s.cala.androidcompents.utils

@@ -1,4 +1,4 @@
-package s.cala.androidcompents.base;
+package s.cala.androidcompent.base;
 
 import android.app.Application;
 import android.content.Context;
