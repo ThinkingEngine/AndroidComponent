@@ -18,7 +18,6 @@ public class OtherUtils {
 
     public static int dip2px(int dp) {
         final float density = appContext.getResources().getDisplayMetrics().density;
-
         return (int) (dp * density + 0.5);
     }
 }

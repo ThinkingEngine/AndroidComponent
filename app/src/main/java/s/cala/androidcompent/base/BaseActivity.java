@@ -6,8 +6,10 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
+import butterknife.ButterKnife;
 import s.cala.androidcompent.manager.ActivityManager;
 import s.cala.androidcompent.utils.ActivityUtils;
+import s.cala.androidcompent.utils.ToastUtils;
 
 /**
  * package name:s.cala.androidcompent.base
@@ -27,6 +29,8 @@ public abstract class BaseActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //将本Activity加入Activity队列。
         ActivityManager.getAppManager().addActivity(this);
+        //绑定butterKnife
+        ButterKnife.bind(this);
 
         initView();
         getData();
@@ -61,6 +65,16 @@ public abstract class BaseActivity extends AppCompatActivity {
      */
     public void startActivity(Activity activity,Bundle bundle){
         ActivityUtils.startActivity(this,activity,bundle);
+    }
+
+    //短Toast。
+    public void showShortToast(String contents){
+        ToastUtils.showShortToast(this,contents);
+    }
+
+    //长Toast。
+    public void showLongToast(String contents){
+        ToastUtils.showLongToast(this,contents);
     }
 
     @Override
