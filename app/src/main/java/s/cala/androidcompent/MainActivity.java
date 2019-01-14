@@ -1,17 +1,19 @@
 package s.cala.androidcompent;
 
 
-import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
 import s.cala.androidcompent.base.BaseActivity;
 import s.cala.androidcompent.model.home.HomeActivity;
+import s.cala.androidcompent.model.settings.SettingActivity;
 
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.tv_test)
     TextView textView;
+    @BindView(R.id.tv_setting)
+    TextView setting;
 
     @Override
     protected int getLayoutId() {
@@ -20,12 +22,8 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new HomeActivity());
-            }
-        });
+        textView.setOnClickListener(v -> startActivity(new HomeActivity()));
+        setting.setOnClickListener(v -> startActivity(new SettingActivity()));
     }
 
     @Override

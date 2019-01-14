@@ -16,7 +16,8 @@
             android:layout_width="32dp"
             android:layout_height="match_parent"
             android:paddingLeft="8dp"
-            android:paddingRight="8dp" />
+            android:paddingRight="8dp"
+            android:src="@mipmap/fanhui"/>
 
         <!--页面标题-->
         <TextView
