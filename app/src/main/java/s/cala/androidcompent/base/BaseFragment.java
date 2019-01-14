@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import s.cala.androidcompent.utils.ActivityUtils;
 import s.cala.androidcompent.utils.ToastUtils;
 
@@ -18,14 +20,18 @@ import s.cala.androidcompent.utils.ToastUtils;
  * date:2019/1/11
  * commits:base fragment
  */
-abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment {
 
     protected Context context = getContext();
+
+    private Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(getLayoutId(), container, false);
+        View rootView = LayoutInflater.from(context).inflate(getLayoutId(),null);
+        unbinder = ButterKnife.bind(this,rootView);
+        return rootView;
     }
 
     @Override
@@ -40,6 +46,12 @@ abstract class BaseFragment extends Fragment {
     public void onAttach(Context context) {
         super.onAttach(context);
         this.context = context;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
     }
 
     /**
@@ -96,5 +108,5 @@ abstract class BaseFragment extends Fragment {
         }
     }
 
-    
+
 }

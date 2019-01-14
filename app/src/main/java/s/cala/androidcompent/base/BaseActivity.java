@@ -37,13 +37,13 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     //获取Activity的布局界面
-    abstract int getLayoutId();
+    protected abstract int getLayoutId();
 
     //初始化view
-    abstract void initView();
+    protected abstract void initView();
 
     //获取数据
-    abstract void getData();
+    public abstract void getData();
 
 
     //跳转到指定的Activity。
