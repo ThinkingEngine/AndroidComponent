@@ -1,4 +1,4 @@
-package s.cala.androidcompent.network;
+package s.cala.androidcompent.network.constant;
 
 import s.cala.androidcompent.BuildConfig;
 

@@ -1,8 +1,7 @@
-package s.cala.androidcompent.network;
+package s.cala.androidcompent.network.interceptor;
 
 import java.io.IOException;
-import java.util.Map;
-import java.util.Set;
+
 
 import okhttp3.Interceptor;
 import okhttp3.Request;

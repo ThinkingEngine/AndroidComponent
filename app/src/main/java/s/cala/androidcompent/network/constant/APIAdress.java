@@ -1,7 +1,7 @@
-package s.cala.androidcompent.network;
+package s.cala.androidcompent.network.constant;
 
-import static s.cala.androidcompent.network.BaseAddress.ACCOUNT_BASE_URL;
-import static s.cala.androidcompent.network.BaseAddress.SERVICE_BASE_URL;
+import static s.cala.androidcompent.network.constant.BaseAddress.ACCOUNT_BASE_URL;
+import static s.cala.androidcompent.network.constant.BaseAddress.SERVICE_BASE_URL;
 
 /**
  * package name:s.cala.androidcompent.network
