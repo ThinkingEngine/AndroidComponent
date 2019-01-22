@@ -26,6 +26,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="setting page" />
+        <TextView
+            android:id="@+id/tv_refresh_activity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="refresh_activity" />
     </LinearLayout>
 
 

@@ -1,4 +1,4 @@
-package s.cala.androidcompent.model.fragments;
+package s.cala.androidcompent.module.fragments;
 
 import android.view.View;
 import android.widget.TextView;

@@ -1,5 +1,7 @@
 package s.cala.androidcompent.network.constant;
 
+import android.os.Build;
+
 import s.cala.androidcompent.BuildConfig;
 
 /**
@@ -23,6 +25,12 @@ public class BaseAddress {
     private static final String LIVE_SERVICE_URL = "";
 
     /**
+     * app更新地址
+     */
+    private static final String DEV_UPDATE_URL = "";
+    private static final String LIVE_UPDATE_URl = "";
+
+    /**
      * 账号api接口根地址
      */
     public static final String ACCOUNT_BASE_URL = BuildConfig.isDev ? DEV_BASE_URL : LIVE_BASE_URL;
@@ -31,4 +39,9 @@ public class BaseAddress {
      * 业务api接口根地址
      */
     public static final String SERVICE_BASE_URL = BuildConfig.isDev ? DEV_SERVICE_URL : LIVE_SERVICE_URL;
+
+    /**
+     * 更新app接口
+     */
+    public static final String UPDATE_URL = BuildConfig.isDev ? DEV_UPDATE_URL : LIVE_UPDATE_URl;
 }

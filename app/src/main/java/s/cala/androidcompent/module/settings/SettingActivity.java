@@ -1,4 +1,4 @@
-package s.cala.androidcompent.model.settings;
+package s.cala.androidcompent.module.settings;
 
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;

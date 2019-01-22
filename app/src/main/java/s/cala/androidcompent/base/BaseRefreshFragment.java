@@ -11,57 +11,47 @@ import android.widget.TextView;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
-import com.scwang.smartrefresh.layout.footer.ClassicsFooter;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 import com.scwang.smartrefresh.layout.listener.OnLoadmoreListener;
 
 import java.util.List;
 
-import butterknife.BindView;
 import s.cala.androidcompent.R;
 import s.cala.androidcompent.utils.NetworkUtils;
-import s.cala.androidcompent.utils.ToastUtils;
 
 /**
  * package name:s.cala.androidcompent.base
  * create:cala
- * date:2019/1/14
- * commits:对RecyclerView刷新的封装
+ * date:2019/1/16
+ * commits:
  */
-public abstract class BaseRefreshActivity<T> extends BaseActivity implements OnLoadmoreListener {
+abstract class BaseRefreshFragment<T> extends BaseFragment implements OnLoadmoreListener {
 
     private int AUTO_REFRESH_DELAY_TIME = 180;
     protected int DEFAULT_LIMIT = 15;
     protected int FIRST_PAGE = 1;
-
     protected int currentPage = FIRST_PAGE;
 
-    @BindView(R.id.smartRefreshLayout)
-    SmartRefreshLayout smartRefreshLayout;
+    protected SmartRefreshLayout smartRefreshLayout;
+    protected RecyclerView recyclerView;
+    protected ClassicsHeader classicsHeader;
 
-    @BindView(R.id.recyclerView)
-    RecyclerView recyclerView;
-
-    @BindView(R.id.classicsHeader)
-    ClassicsHeader classicsHeader;
-
-    @BindView(R.id.classicsFooter)
-    ClassicsFooter classicsFooter;
-
-    private BaseQuickAdapter<T> adapter;
-    private RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+    protected BaseQuickAdapter<T> adapter = null;
 
 
-    protected abstract void initViews();
-
-    protected abstract void getData(int page);
-
-    protected abstract BaseQuickAdapter<T> getAdapter();
+    abstract void initViews(View view);
+    abstract void getDatas(int page);
+    abstract BaseQuickAdapter<T> getAdapter();
 
     @Override
-    protected void initView() {
-        initViews();
-        initRecyclerView();
+    public void initView(View view) {
+
+        smartRefreshLayout = view.findViewById(R.id.smartRefreshLayout);
+        recyclerView = view.findViewById(R.id.recyclerView);
+        classicsHeader = view.findViewById(R.id.classicsHeader);
+
+        initViews(view);
+        initRecyclerview();
         initRefresh();
     }
 
@@ -89,48 +79,33 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements OnL
         setData(data, emtpyStr);
     }
 
-    @Override
-    public void onLoadmore(RefreshLayout refreshlayout) {
-        currentPage++;
-        getData(currentPage);
+    private void initRecyclerview(){
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        BaseQuickAdapter<T> mAdapter = initAdapter();
+        recyclerView.setAdapter(mAdapter);
     }
 
-    private void initRecyclerView() {
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(initAdapter());
-    }
-
-    private BaseQuickAdapter<T> initAdapter() {
+    private BaseQuickAdapter<T> initAdapter(){
         adapter = getAdapter();
         smartRefreshLayout.setOnLoadmoreListener(this);
         return adapter;
     }
 
-    private void initRefresh() {
+    private void initRefresh(){
         classicsHeader.setEnableLastTime(false);
-        classicsFooter.setEnabled(true);
 
-        if (NetworkUtils.isNetConnected(this)) {
+        if(NetworkUtils.isNetConnected(getContext())){
             smartRefreshLayout.autoRefresh(AUTO_REFRESH_DELAY_TIME);
-        } else {
+        }else{
             adapter.setEmptyView(getEmptyView("网络未连接"));
         }
 
         smartRefreshLayout.setOnRefreshListener(refreshlayout -> {
-//            smartRefreshLayout.setLoadmoreFinished(false);
+            smartRefreshLayout.setLoadmoreFinished(false);
             currentPage = FIRST_PAGE;
-            getData(FIRST_PAGE);
-            refreshlayout.finishRefresh();
-
+            getDatas(FIRST_PAGE);
         });
-
-        smartRefreshLayout.setOnLoadmoreListener(refreshlayout -> {
-            showShortToast("xxx");
-            refreshlayout.finishLoadmore();
-        });
-
     }
-
 
     private void setData(@Nullable List<T> data, String emptyStr) {
 
@@ -141,7 +116,7 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements OnL
             if (currentPage == FIRST_PAGE) {
                 adapter.getData().clear();
                 adapter.notifyDataSetChanged();
-                if (!NetworkUtils.isNetConnected(this)) {
+                if (!NetworkUtils.isNetConnected(getContext())) {
                     adapter.setEmptyView(getEmptyView("网络未连接"));
                 } else {
                     adapter.setEmptyView(getEmptyView(emptyStr));
@@ -163,13 +138,19 @@ public abstract class BaseRefreshActivity<T> extends BaseActivity implements OnL
         }
     }
 
+    @Override
+    public void onLoadmore(RefreshLayout refreshlayout) {
+        currentPage++;
+        getDatas(currentPage);
+    }
+
     /**
      * 加载空页面
      *
      * @param emptyStr 空状态提示文字
      */
     private View getEmptyView(String emptyStr) {
-        View emptyView = LayoutInflater.from(this).inflate(R.layout.list_empty_layout, null);
+        View emptyView = LayoutInflater.from(getContext()).inflate(R.layout.list_empty_layout, null);
         TextView tv = emptyView.findViewById(R.id.empty_contents);
         if (emptyStr.isEmpty()) {
             tv.setText("没有数据");

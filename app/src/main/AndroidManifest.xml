@@ -24,11 +24,16 @@
         </activity>
 
         <activity
-            android:name=".model.home.HomeActivity"
+            android:name=".module.home.HomeActivity"
             android:launchMode="singleTask" />
         <activity
-            android:name=".model.settings.SettingActivity"
+            android:name=".module.settings.SettingActivity"
             android:launchMode="standard" />
+        <activity
+            android:name=".module.home.RefreshActivity"
+            android:launchMode="standard" />
+
+        <service android:name=".services.DownloadIntentService"/>
     </application>
 
 </manifest>

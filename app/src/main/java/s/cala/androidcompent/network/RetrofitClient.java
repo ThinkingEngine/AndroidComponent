@@ -16,6 +16,7 @@ import s.cala.androidcompent.network.interceptor.BaseInterceptor;
 import s.cala.androidcompent.network.security.Certificate;
 import s.cala.androidcompent.network.serviceinstance.TestServiceInstance;
 import s.cala.androidcompent.network.servicesinterface.TestServiceInterface;
+import s.cala.androidcompent.network.servicesinterface.UpdateServiceInterface;
 
 /**
  * package name:s.cala.androidcompent.network
@@ -109,4 +110,8 @@ public class RetrofitClient {
         return createHttp(TestServiceInterface.class);
     }
 
+    //更新服务
+    public UpdateServiceInterface getUpdateService(){
+        return createHttp(UpdateServiceInterface.class);
+    }
 }

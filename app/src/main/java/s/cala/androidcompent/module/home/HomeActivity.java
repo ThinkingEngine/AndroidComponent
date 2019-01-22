@@ -1,4 +1,4 @@
-package s.cala.androidcompent.model.home;
+package s.cala.androidcompent.module.home;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -10,7 +10,7 @@ import android.widget.RadioGroup;
 import butterknife.BindView;
 import s.cala.androidcompent.R;
 import s.cala.androidcompent.base.BaseActivity;
-import s.cala.androidcompent.model.fragments.TitlePageFragment;
+import s.cala.androidcompent.module.fragments.TitlePageFragment;
 
 /**
  * package name:s.cala.androidcompent.model.home

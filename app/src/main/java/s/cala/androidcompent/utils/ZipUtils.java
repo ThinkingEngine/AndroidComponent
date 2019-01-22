@@ -18,6 +18,13 @@ import java.util.zip.ZipInputStream;
  */
 public class ZipUtils {
 
+
+    /**
+     * 解压zip文件
+     *
+     * @param zipFile 待解压的zip文件
+     * @param destination 解压后的文件存放路径
+     * */
     public static void unzipFile(File zipFile, String destination) throws IOException {
 
         FileInputStream fileInputStream = null;
