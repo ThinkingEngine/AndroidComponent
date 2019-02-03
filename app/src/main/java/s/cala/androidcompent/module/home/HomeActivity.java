@@ -43,6 +43,7 @@ public class HomeActivity extends BaseActivity {
 
     private long exitTime = 0L;
 
+    //测试
 
     @Override
     protected int getLayoutId() {
@@ -105,6 +106,7 @@ public class HomeActivity extends BaseActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //
     private void replaceFragment(Fragment fragment) {
 
         fragmentTransaction = manager.beginTransaction();
