@@ -5,6 +5,11 @@ import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.TimeZone;
+
 /**
  * package name:s.cala.androidcompents.utils
  * create:cala
@@ -37,6 +42,60 @@ public class StringUtils {
         return mobile.replaceAll("(\\d{3})\\d{4}(\\d{4})", "$1****$2");
     }
 
+    /**
+     * 把字符串转换为数字
+     *
+     * @param value
+     * @return
+     */
+    public static int textToInteger(String value) {
+        int data = -1;
+        if (!TextUtils.isEmpty(value.trim()) && TextUtils.isDigitsOnly(value)) {
+            data = Integer.valueOf(value);
+        }
+        return data;
+    }
+
+    /**
+     * 将数字转化为字符串
+     *
+     * @param value
+     * @param defVal
+     * @return
+     */
+    public static String numberToText(String value, String defVal) {
+
+        if (!TextUtils.isEmpty(value.trim()) && TextUtils.isDigitsOnly(value)) {
+            return value;
+        }
+        return defVal;
+    }
+
+    /**
+     * formatType格式为yyyy-MM-dd HH:mm:ss
+     * yyyy年MM月dd日 HH时mm分ss秒
+     * data Date类型的时间
+     */
+    public static String dateToString(Date data, String formatType) {
+        return new SimpleDateFormat(formatType).format(data);
+    }
+
+    /**
+     * strTime要转换的string类型的时间，formatType要转换的格式yyyy-MM-dd HH:mm:ss//yyyy年MM月dd日
+     * HH时mm分ss秒，
+     * strTime的时间格式必须要与formatType的时间格式相同
+     */
+    public static Date string2Date(String strTime, String formatType) {
+        try {
+            SimpleDateFormat dateFormat = new SimpleDateFormat(formatType);
+            TimeZone timeZone = TimeZone.getTimeZone("GMT+08:00");
+            dateFormat.setTimeZone(timeZone);
+            return dateFormat.parse(strTime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
+    }
 
     /**
      * 判断字符串是否符合手机号码格式
